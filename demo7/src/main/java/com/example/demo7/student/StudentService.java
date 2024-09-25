@@ -1,6 +1,7 @@
 package com.example.demo7.student;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -16,5 +17,17 @@ public class StudentService {
 
     public List<Student> getStudents(){
         return studentRepository.findAll();
+    }
+
+    public void addStudent(Student student) {
+        
+        Optional<Student> studentOptional = studentRepository.findStudentByEmail(student.getEmail());
+
+        if(studentOptional.isPresent())
+        {
+            throw new IllegalStateException("Email already exist!");
+        }
+
+        studentRepository.save(student);
     }
 }

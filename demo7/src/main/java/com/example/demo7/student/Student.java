@@ -32,6 +32,7 @@ public class Student {
     private LocalDate dob;
     private String email;
     
+    //does not add this to the database column that is to be generated
     @Transient
     private int age;
 
